@@ -9,7 +9,7 @@ services:
     depends_on:
       - fuseki
     environment:
-      - JENA_REMOTE_ENDPOINT=${JENA_REMOTE_ENDPOINT}
+      - JENA_REMOTE_ENDPOINT=http://fuseki:3030/dataset
     networks:
       - demo-net
 
