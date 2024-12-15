@@ -18,8 +18,8 @@ services:
     container_name: jena
     ports:
       - "3030:3030"
-    volumes:
-      - ./fuseki-config/data:/fuseki/databases               # Mount TDB dataset
+    # volumes:
+      # - ./fuseki-config/data:/fuseki/databases               # Mount TDB dataset
 
     environment:
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
