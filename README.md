@@ -254,7 +254,7 @@ Notebook Demo:
 
 ---
 
-TODO: Add video demo
+[![Video Demo](https://img.youtube.com/vi/l3sAC_qWFBQ/maxres1.jpg)](https://youtu.be/l3sAC_qWFBQ)
 
 To test the rml mappings and the RDF generation you can run the following commands:
 
@@ -319,38 +319,38 @@ This use case demonstrates how graph learning can be applied to self - adaptive 
 The current implementation is a proof-of-concept that operates within a simulated environment using artificial data.While it demonstrates the feasibility of the approach, it has several limitations and offers opportunities for future enhancement to address more complex use cases and real-world scenarios:
 
 
-| **Aspect**                                   | **Details**                                                                                                                                                      |
-| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **1. Link Prediction for Health Insights**   |                                                                                                                                                                  |
+| **Aspect**                                   | **Details**                                                                                                                                                        |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **1. Link Prediction for Health Insights**   |                                                                                                                                                                    |
 | **Scenario**                                 | Predict missing relationships, such as determining whether specific environmental factors(e.g., high temperature or humidity) affect a patient's health condition. |
-| **Graph Input**                              | **Nodes:** Represent entities like patients, environmental conditions, and medical observations. **Edges:** Represent known or inferred relationships.           |
-| **Learning Task**                            | Employ **link prediction algorithms** like **Node2Vec** or **GraphSAGE** to identify potential correlations or causal links.                                 |
-| **Adaptation**                               | Propose adaptive measures such as adjusting room temperature or humidity to improve patient comfort or mitigate risks.                                           |
-| **2. Anomaly Detection for Early Warnings**  |                                                                                                                                                                  |
-| **Scenario**                                 | Detect unusual or potentially dangerous patterns in patient activity, health metrics, or environmental conditions.                                               |
-| **Graph Input**                              | **Nodes:** Include patients, sensors, and health observations. **Features:** Historical data(e.g., heart rate, activity levels, environmental readings).         |
-| **Learning Task**                            | Leverage **anomaly detection models** (e.g., Isolation Forests, Autoencoders) on graph embeddings to flag outliers or abnormal behaviors.                        |
-| **Adaptation**                               | Alert caregivers or healthcare providers in real - time and suggest actionable interventions, such as checking on the patient or scheduling a medical evaluation. |
-| **3. Data Quality and Integrity**            |                                                                                                                                                                  |
-| **Challenge**                                | The accuracy and effectiveness of the process depend heavily on the quality of RDF data and graph representations.                                               |
-| **Future Work**                              | Develop **automated data validation pipelines** and use **data profiling tools** to identify and correct incomplete or inconsistent records.                   |
-| **Impact**                                   | Improved data quality ensures better semantic enrichment, more accurate learning, and reliable adaptations.                                                      |
-| **4. Scalability**                           |                                                                                                                                                                  |
-| **Challenge**                                | The current approach may not efficiently handle large - scale datasets or highly interconnected graphs.                                                          |
-| **Future Work**                              | Optimize graph learning algorithms for **distributed processing** and implement techniques like **subgraph sampling** and **graph pruning**.                 |
-| **Impact**                                   | Enables the system to process large, real - world datasets efficiently, supporting diverse use cases.                                                            |
-| **5. Explainability and Trust**              |                                                                                                                                                                  |
-| **Challenge**                                | Graph learning models often operate as black - box systems, making it difficult to trust or understand predictions.                                              |
-| **Future Work**                              | Integrate **explainable AI(XAI)** techniques and provide **human - readable explanations** for predictions and suggested adaptations.                          |
-| **Impact**                                   | Enhances user trust and facilitates informed decision - making by healthcare professionals.                                                                      |
-| **6. Integration with Real - World Systems** |                                                                                                                                                                  |
-| **Challenge**                                | The simulated environment lacks integration with actual IoT devices, healthcare systems, and real - world data streams.                                          |
-| **Future Work**                              | Connect the workflow to live data feeds from IoT sensors, medical devices, and EHR systems.Implement **real - time processing** to enable dynamic adaptations.   |
-| **Impact**                                   | Makes the system deployable in practical settings, such as smart homes, hospitals, and elderly care facilities.                                                  |
-| **7. Domain - Specific Customization**       |                                                                                                                                                                  |
-| **Challenge**                                | The approach is general and may require customization to address domain - specific needs.                                                                        |
-| **Future Work**                              | Develop specialized ontologies and domain - specific graph models for various sectors, such as cardiovascular health or mental health monitoring.                |
-| **Impact**                                   | Enhances the system's adaptability and relevance across diverse healthcare and IoT applications.                                                                 |
+| **Graph Input**                              | **Nodes:** Represent entities like patients, environmental conditions, and medical observations. **Edges:** Represent known or inferred relationships.             |
+| **Learning Task**                            | Employ **link prediction algorithms** like **Node2Vec** or **GraphSAGE** to identify potential correlations or causal links.                                       |
+| **Adaptation**                               | Propose adaptive measures such as adjusting room temperature or humidity to improve patient comfort or mitigate risks.                                             |
+| **2. Anomaly Detection for Early Warnings**  |                                                                                                                                                                    |
+| **Scenario**                                 | Detect unusual or potentially dangerous patterns in patient activity, health metrics, or environmental conditions.                                                 |
+| **Graph Input**                              | **Nodes:** Include patients, sensors, and health observations. **Features:** Historical data(e.g., heart rate, activity levels, environmental readings).           |
+| **Learning Task**                            | Leverage **anomaly detection models** (e.g., Isolation Forests, Autoencoders) on graph embeddings to flag outliers or abnormal behaviors.                          |
+| **Adaptation**                               | Alert caregivers or healthcare providers in real - time and suggest actionable interventions, such as checking on the patient or scheduling a medical evaluation.  |
+| **3. Data Quality and Integrity**            |                                                                                                                                                                    |
+| **Challenge**                                | The accuracy and effectiveness of the process depend heavily on the quality of RDF data and graph representations.                                                 |
+| **Future Work**                              | Develop **automated data validation pipelines** and use **data profiling tools** to identify and correct incomplete or inconsistent records.                       |
+| **Impact**                                   | Improved data quality ensures better semantic enrichment, more accurate learning, and reliable adaptations.                                                        |
+| **4. Scalability**                           |                                                                                                                                                                    |
+| **Challenge**                                | The current approach may not efficiently handle large - scale datasets or highly interconnected graphs.                                                            |
+| **Future Work**                              | Optimize graph learning algorithms for **distributed processing** and implement techniques like **subgraph sampling** and **graph pruning**.                       |
+| **Impact**                                   | Enables the system to process large, real - world datasets efficiently, supporting diverse use cases.                                                              |
+| **5. Explainability and Trust**              |                                                                                                                                                                    |
+| **Challenge**                                | Graph learning models often operate as black - box systems, making it difficult to trust or understand predictions.                                                |
+| **Future Work**                              | Integrate **explainable AI(XAI)** techniques and provide **human - readable explanations** for predictions and suggested adaptations.                              |
+| **Impact**                                   | Enhances user trust and facilitates informed decision - making by healthcare professionals.                                                                        |
+| **6. Integration with Real - World Systems** |                                                                                                                                                                    |
+| **Challenge**                                | The simulated environment lacks integration with actual IoT devices, healthcare systems, and real - world data streams.                                            |
+| **Future Work**                              | Connect the workflow to live data feeds from IoT sensors, medical devices, and EHR systems.Implement **real - time processing** to enable dynamic adaptations.     |
+| **Impact**                                   | Makes the system deployable in practical settings, such as smart homes, hospitals, and elderly care facilities.                                                    |
+| **7. Domain - Specific Customization**       |                                                                                                                                                                    |
+| **Challenge**                                | The approach is general and may require customization to address domain - specific needs.                                                                          |
+| **Future Work**                              | Develop specialized ontologies and domain - specific graph models for various sectors, such as cardiovascular health or mental health monitoring.                  |
+| **Impact**                                   | Enhances the system's adaptability and relevance across diverse healthcare and IoT applications.                                                                   |
 
 ---
 
