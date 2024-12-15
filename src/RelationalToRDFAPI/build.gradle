@@ -1,0 +1,88 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.2'
+    id 'io.spring.dependency-management' version '1.1.6'
+    id "de.undercouch.download" version "5.0.0"
+}
+
+group = 'eu.pharaon'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://maven.ontotext.com/repository/owlim-releases"
+    }
+}
+
+def rmlmapperVersion = "6.5.1-r371"  // Specify the desired version
+def rmlmapperUrl = "https://github.com/RMLio/rmlmapper-java/releases/download/v6.5.1/rmlmapper-6.5.1-r371-all.jar"
+def rmlmapperJar = file("src/main/resources/jar/rmlmapper-6.5.1-r371-all.jar")
+
+task downloadRmlMapper(type: Download) {
+    src rmlmapperUrl
+    dest rmlmapperJar
+    onlyIfNewer true
+}
+
+dependencies {
+    // Spring Boot dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Lombok dependency
+    compileOnly 'org.projectlombok:lombok'
+
+    // Spring Boot DevTools dependency
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // Lombok annotation processor
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // Spring Boot Test dependencies
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // swagger dependency
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0"
+
+    implementation 'javax.servlet:javax.servlet-api:4.0.1'
+
+    // Apache Jena Core
+    implementation 'org.apache.jena:apache-jena-libs:4.8.0'
+
+    // Apache Jena ARQ (Algebraic Query API) for SPARQL
+    implementation 'org.apache.jena:jena-arq:4.8.0'
+
+    // Apache Jena Fuseki Client for SPARQL Endpoint
+    implementation 'org.apache.jena:jena-fuseki:4.8.0'
+
+    // JPA
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // H2 Database
+    runtimeOnly 'com.h2database:h2'
+
+    // Spring Boot Starter for AOP (Optional: To handle cross-cutting concerns if needed)
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+tasks.named('processResources') {
+    dependsOn downloadRmlMapper
+}

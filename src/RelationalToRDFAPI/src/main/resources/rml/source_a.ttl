@@ -1,0 +1,164 @@
+# Document metadata
+@prefix dcat:    <http://www.w3.org/ns/dcat#>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix prov:    <http://www.w3.org/ns/prov#>.
+@prefix void:    <http://rdfs.org/ns/void#>.
+# RML mappings
+@prefix rr:      <http://www.w3.org/ns/r2rml#>.
+@prefix rml:     <http://semweb.mmlab.be/ns/rml#>.
+@prefix ql:      <http://semweb.mmlab.be/ns/ql#>.
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#>.
+@prefix sosa:    <http://www.w3.org/ns/sosa/>.
+@prefix ucum:    <http://unitsofmeasure.org/>.
+@prefix schema:  <http://schema.org/>.
+@prefix fhir:    <http://hl7.org/fhir/>.
+@prefix hultig:  <http://hultig.ubi.pt/ontology/source_a#>.
+
+
+hultig:DeviceMapping
+    a                     rr:TriplesMap ;
+    rml:logicalSource     [ rml:source               "rml_temp_dir/data.json" ;
+                            rml:referenceFormulation ql:JSONPath ;
+                            rml:iterator             "$.devices[*]" ] ;
+    rr:subjectMap         [ rr:template "http://hultig.ubi.pt/ontology/source_a/device/{assetId}" ;
+                            rr:class    fhir:Device ; ] ;
+    rr:predicateObjectMap [ rr:predicate fhir:Device.identifier ;
+                            rr:objectMap [ rml:reference "assetId" ] ] ;
+    rr:predicateObjectMap [ rr:predicate fhir:Device.deviceName ;
+                            rr:objectMap [ rml:reference "name" ] ] ;
+    rr:predicateObjectMap [ rr:predicate fhir:Device.serialNumber ;
+                            rr:objectMap [ rml:reference "serialNumber" ] ] ;
+    rr:predicateObjectMap [ rr:predicate fhir:Device.manufacturer ;
+                            rr:objectMap [ rml:reference "manufacturer" ] ] ;
+    # relation with user
+    rr:predicateObjectMap [ rr:predicate fhir:Device.owner ;
+                            rr:objectMap [ rr:template "http://hultig.ubi.pt/ontology/source_a/patient/{userId}" ] ] .
+
+hultig:ActuatorMapping
+    a                     rr:TriplesMap ;
+    rml:logicalSource     [ rml:source               "rml_temp_dir/data.json" ;
+                            rml:referenceFormulation ql:JSONPath ;
+                            rml:iterator             "$.actuators[*]" ] ;
+    rr:subjectMap         [ rr:template "http://hultig.ubi.pt/ontology/source_a/actuator/{id}" ;
+                            rr:class    sosa:Actuator ; ] ;
+    rr:predicateObjectMap [ rr:predicate sosa:isHostedBy ;
+                            rr:objectMap [ rr:template "http://hultig.ubi.pt/ontology/source_a/device/{deviceId}" ] ] .
+
+hultig:UIDeviceMapping
+    a                     rr:TriplesMap ;
+    rml:logicalSource     [ rml:source               "rml_temp_dir/data.json" ;
+                            rml:referenceFormulation ql:JSONPath ;
+                            rml:iterator             "$.uiDevices[*]" ] ;
+    rr:subjectMap         [ rr:template "http://hultig.ubi.pt/ontology/source_a/platform/{id}" ;
+                            rr:class    sosa:Platform ; ] ;
+    rr:predicateObjectMap [ rr:predicate sosa:hosts ;
+                            rr:objectMap [ rr:template "http://hultig.ubi.pt/ontology/source_a/sensor/{sensorId}" ] ;
+                            rr:objectMap [ rr:template
+                                                   "http://hultig.ubi.pt/ontology/source_a/actuator/{actuatorId}" ] ] ;
+    rr:predicateObjectMap [ rr:predicate sosa:isHostedBy ;
+                            rr:objectMap [ rr:template "http://hultig.ubi.pt/ontology/source_a/device/{deviceId}" ] ] .
+
+hultig:SensorMapping
+    a                     rr:TriplesMap ;
+    rml:logicalSource     [ rml:source               "rml_temp_dir/data.json" ;
+                            rml:referenceFormulation ql:JSONPath ;
+                            rml:iterator             "$.sensors[*]" ] ;
+    rr:subjectMap         [ rr:template "http://hultig.ubi.pt/ontology/source_a/sensor/{id}" ;
+                            rr:class    sosa:Sensor ; ] ;
+    rr:predicateObjectMap [ rr:predicate fhir:Device.identifier ;
+                            rr:objectMap [ rml:reference "id" ] ] ;
+    rr:predicateObjectMap [ rr:predicate schema:description ;
+                            rr:objectMap [ rml:reference "description" ] ] ;
+    rr:predicateObjectMap [ rr:predicate schema:location ;
+                            rr:objectMap [ rml:reference "indoorLocation" ] ] ;
+    rr:predicateObjectMap [ rr:predicate sosa:observes ;
+                            rr:objectMap [ rml:reference "sensorType" ] ] ;
+    rr:predicateObjectMap [ rr:predicate sosa:hasSimpleResult ;
+                            rr:objectMap [ rml:reference "threshold" ;
+                                           rr:datatype   ucum:unit ] ] ;
+    rr:predicateObjectMap [ rr:predicate sosa:isHostedBy ;
+                            rr:objectMap [ rr:template "http://hultig.ubi.pt/ontology/source_a/device/{deviceId}" ] ] .
+
+hultig:TemperatureContextEventMapping
+    a                     rr:TriplesMap ;
+    rml:logicalSource     [ rml:source               "rml_temp_dir/data.json" ;
+                            rml:referenceFormulation ql:JSONPath ;
+                            rml:iterator             "$.events[?(@.originType == 'TEMPERATURE')]" ] ;
+    rr:subjectMap         [ rr:template "http://hultig.ubi.pt/ontology/source_a/sensormeasurementevent/{id}" ;
+                            rr:class    sosa:Observation ] ;
+    rr:predicateObjectMap [ rr:predicate fhir:Patient.identifier ;
+                            rr:objectMap [ rml:reference "userId" ] ] ;
+    rr:predicateObjectMap [ rr:predicate sosa:resultTime ;
+                            rr:objectMap [ rml:reference "timestamp" ;
+                                           rr:datatype   xsd:dateTime ] ] ;
+    rr:predicateObjectMap [ rr:predicate sosa:hasSimpleResult ;
+                            rr:objectMap [ rml:reference "value" ;
+                                           rr:datatype   xsd:double ;
+                                           rr:datatype   ucum:Cel ] ] ;
+    rr:predicateObjectMap [ rr:predicate fhir:Device.owner ;
+                            rr:objectMap [ rr:template "http://hultig.ubi.pt/ontology/source_a/sensor/{originId}" ;
+                                           rr:class    fhir:Device ] ] ;
+    rr:predicateObjectMap [ rr:predicate sosa:observedProperty ;
+                            rr:objectMap [ rr:constant sosa:Property_Temperature ] ] .
+
+hultig:HumidityContextEventMapping
+    a                     rr:TriplesMap ;
+    rml:logicalSource     [ rml:source               "rml_temp_dir/data.json" ;
+                            rml:referenceFormulation ql:JSONPath ;
+                            rml:iterator             "$.events[?(@.originType == 'HUMIDITY')]" ] ;
+    rr:subjectMap         [ rr:template "http://hultig.ubi.pt/ontology/source_a/sensormeasurementevent/{id}" ;
+                            rr:class    sosa:Observation ] ;
+    rr:predicateObjectMap [ rr:predicate fhir:Patient.identifier ;
+                            rr:objectMap [ rml:reference "userId" ] ] ;
+    rr:predicateObjectMap [ rr:predicate sosa:resultTime ;
+                            rr:objectMap [ rml:reference "timestamp" ;
+                                           rr:datatype   xsd:dateTime ] ] ;
+    rr:predicateObjectMap [ rr:predicate sosa:hasSimpleResult ;
+                            rr:objectMap [ rml:reference "value" ;
+                                           rr:datatype   xsd:double ;
+                                           rr:datatype   ucum:Percent ] ] ;
+    rr:predicateObjectMap [ rr:predicate sosa:madeBySensor ;
+                            rr:objectMap [ rr:template "http://hultig.ubi.pt/ontology/source_a/sensor/{originId}" ] ] ;
+    rr:predicateObjectMap [ rr:predicate sosa:observedProperty ;
+                            rr:objectMap [ rr:constant sosa:Property_Humidity ] ] .
+
+# Document metadata
+<http://hultig.ubi.pt/ontology/amicare/mappings>
+    a                                                                                             dcat:Dataset,
+                                                                                                  prov:Entity ;
+    dcterms:title                                                                                 "source_a Pilot RML Mappings" ;
+    dcterms:description                                                                           "RML mappings for transforming source_a JSON data into RDF using mainly FHIR and SOSA ontologies." ;
+    dcterms:issued                                                                                "2024-02-27T00:00:00Z"^^xsd:dateTime ;
+    dcterms:modified                                                                              "2024-02-27T00:00:00Z"^^xsd:dateTime ;
+    dcterms:creator                                                                               <http://hultig.ubi.pt/creators/1> ;
+    prov:wasGeneratedBy                                                                           <http://hultig.ubi.pt/activities/1> ;
+    void:vocabulary                                                                               [ a void:Vocabulary ;
+                                                                                                    void:uri
+                                                                                                      <http://hl7.org/fhir/> ],
+                                                                                                  [ a void:Vocabulary ;
+                                                                                                    void:uri
+                                                                                                      <http://unitsofmeasure.org/> ],
+                                                                                                  [ a void:Vocabulary ;
+                                                                                                    void:uri
+                                                                                                      <http://schema.org/> ],
+                                                                                                  [ a void:Vocabulary ;
+                                                                                                    void:uri
+                                                                                                      <http://www.w3.org/ns/sosa/> ] ;
+    void:feature                                                                                  [ a void:TechnicalFeature ;
+                                                                                                    void:uri
+                                                                                                      <http://semweb.mmlab.be/ns/rml#> ] ;
+    void:exampleResource                                                                          <http://hultig.ubi.pt/ontology/amicare/user/123>,
+                                                                                                  <http://hultig.ubi.pt/ontology/amicare/environment/abc> .
+
+<http://hultig.ubi.pt/ontology/creators/1>
+    a                    prov:Agent ;
+    foaf:givenName       "UBI" ;
+    foaf:mbox            <mailto:mail@example.org> ;
+    prov:actedOnBehalfOf foaf:Organization ;
+    dcterms:name         "UBI" .
+
+<http://hultig.ubi.pt/activities/1>
+    a                      prov:Activity ;
+    prov:startedAtTime     "2024-02-02T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime       ""^^xsd:dateTime ;
+    prov:wasAssociatedWith <http://hultig.ubi.pt/creators/1> .

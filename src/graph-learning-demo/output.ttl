@@ -1,0 +1,40 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix hultig: <http://hultig.ubi.pt/ontology/source_a#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix schema: <http://schema.org/> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix ucum: <http://unitsofmeasure.org/> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://hultig.ubi.pt/ontology/source_a/actuator/act_001> a sosa:Actuator;
+  sosa:isHostedBy <http://hultig.ubi.pt/ontology/source_a/device/dev_001> .
+
+<http://hultig.ubi.pt/ontology/source_a/platform/ui_001> a sosa:Platform;
+  sosa:hosts <http://hultig.ubi.pt/ontology/source_a/actuator/act_001>, <http://hultig.ubi.pt/ontology/source_a/sensor/sens_001>;
+  sosa:isHostedBy <http://hultig.ubi.pt/ontology/source_a/device/dev_001> .
+
+<http://hultig.ubi.pt/ontology/source_a/sensor/sens_001> a sosa:Sensor;
+  fhir:Device.identifier "sens_001";
+  sosa:hasSimpleResult "35.0"^^ucum:unit;
+  sosa:isHostedBy <http://hultig.ubi.pt/ontology/source_a/device/dev_001> .
+
+<http://hultig.ubi.pt/ontology/source_a/sensormeasurementevent/evt_001> a sosa:Observation;
+  fhir:Device.owner <http://hultig.ubi.pt/ontology/source_a/sensor/sens_001>;
+  fhir:Patient.identifier "usr_002";
+  sosa:hasSimpleResult "28.7"^^ucum:Cel;
+  sosa:observedProperty sosa:Property_Temperature;
+  sosa:resultTime "2021-09-29T11:19:11.788Z"^^xsd:dateTime .
+
+<http://hultig.ubi.pt/ontology/source_a/sensormeasurementevent/evt_002> a sosa:Observation;
+  fhir:Patient.identifier "usr_003";
+  sosa:hasSimpleResult "38.24"^^ucum:Percent;
+  sosa:madeBySensor <http://hultig.ubi.pt/ontology/source_a/sensor/sens_002>;
+  sosa:observedProperty sosa:Property_Humidity;
+  sosa:resultTime "2024-06-01T00:00:00.000Z"^^xsd:dateTime .

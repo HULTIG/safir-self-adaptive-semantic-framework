@@ -1,0 +1,31 @@
+@prefix : <http://example.org/smarthabits/> .
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix ex: <http://example.org/> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/sensormeasurementevent/evt_001> a ex:SensorMeasurementEvent;
+  ex:dimension "VALUE";
+  ex:originId "sens_001";
+  ex:originType "TEMPERATURE";
+  ex:timestamp "2021-09-29T11:19:11.788Z"^^xsd:dateTime;
+  ex:value 2.87E1 .
+
+<http://example.com/sensormeasurementevent/evt_002> a ex:SensorMeasurementEvent;
+  ex:dimension "VALUE";
+  ex:originId "sens_002";
+  ex:originType "HUMIDITY";
+  ex:timestamp "2024-06-01T00:00:00.000Z"^^xsd:dateTime;
+  ex:value 3.824E1 .
+
+<http://example.org/actuator/act_001> a schema:Thing;
+  schema:isPartOf <http://example.org/device/dev_001> .
+
+<http://example.org/sensor/sens_001> a schema:Thing;
+  schema:isPartOf <http://example.org/device/dev_001> .
+
+<http://example.org/uidevice/ui_001> a schema:Product;
+  schema:isPartOf <http://example.org/device/dev_001> .

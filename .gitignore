@@ -1,0 +1,4 @@
+/rmlmapper*.jar
+/src/graph-learning-demo/.idea/
+src/fuseki-config/databases/*
+.idea/*

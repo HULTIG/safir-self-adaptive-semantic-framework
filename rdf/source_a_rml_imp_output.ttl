@@ -1,0 +1,27 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix hultig: <http://hultig.ubi.pt/ontology/source_a#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix schema: <http://schema.org/> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix ssno: <http://www.w3.org/ns/ssn/> .
+@prefix ucum: <http://unitsofmeasure.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://hultig.ubi.pt/ontology/source_a/Observation/evt_001> a sosa:Observation;
+  sosa:hasSimpleResult "28.7"^^ucum:degreeCelsius;
+  sosa:madeBySensor "sens_001";
+  sosa:observedProperty sosa:Property_Temperature, "VALUE";
+  sosa:resultTime "2021-09-29T11:19:11.788Z"^^xsd:dateTime .
+
+<http://hultig.ubi.pt/ontology/source_a/actuator/act_001> a schema:Thing;
+  schema:isPartOf <http://hultig.ubi.pt/ontology/source_a/device/dev_001> .
+
+<http://hultig.ubi.pt/ontology/source_a/sensor/sens_001> a ssno:Sensor;
+  schema:isPartOf <http://hultig.ubi.pt/ontology/source_a/device/dev_001>;
+  sosa:hasSimpleResult "35.0"^^ucum:unit .
+
+<http://hultig.ubi.pt/ontology/source_a/uidevice/ui_001> a schema:Product;
+  schema:isPartOf <http://hultig.ubi.pt/ontology/source_a/device/dev_001>;
+  sosa:hosts <http://hultig.ubi.pt/ontology/source_a/actuator/act_001>, <http://hultig.ubi.pt/ontology/source_a/sensor/sens_001> .

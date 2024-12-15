@@ -1,0 +1,35 @@
+Docker
+Docker compose
+Java 17
+RMLMapper 6.5.1
+Apache Jena Fuseki 5.1.0
+Apache Jena TDB 4.2.2
+Python 3.10.2
+
+=====
+
+Specific Python libraries:
+
+jupyter
+rdflib
+networkx
+scikit-learn
+matplotlib
+pandas
+numpy
+
+torch
+torch_cluster
+torch-geometric
+torch_scatter
+torch_sparse
+torch-spline-conv
+
+=====
+
+Specific Java Libraries
+
+R2RML
+Spring Boot
+Lombok
+Springdoc Openapi

@@ -1,0 +1,49 @@
+services:
+  rml-api:
+    build:
+      context: ./RelationalToRDFAPI
+      dockerfile: Dockerfile
+    container_name: api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - fuseki
+    environment:
+      - JENA_REMOTE_ENDPOINT=${JENA_REMOTE_ENDPOINT}
+    networks:
+      - demo-net
+
+  fuseki:
+    image: stain/jena-fuseki
+    container_name: jena
+    ports:
+      - "3030:3030"
+    volumes:
+      - ./fuseki-config/data:/fuseki/databases               # Mount TDB dataset
+
+    environment:
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+      - JVM_ARGS=${JVM_ARGS:-"-Xmx2g"}
+
+    networks:
+      - demo-net
+
+  notebook:
+    build:
+      context: ./graph-learning-demo
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+
+    volumes:
+      - ./graph-learning-demo:/home/app
+    networks:
+      - demo-net
+
+volumes:
+  fuseki-data:
+
+networks:
+  demo-net:
+    driver: bridge
+  
