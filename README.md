@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/903761503.svg)](https://doi.org/10.5281/zenodo.14503359)
+
 # SAFIR: A Self-Adaptive Semantic Framework for Data Interoperability in IoT and Healthcare Systems based on Graph Learning
   > **Bridging Semantic Interoperability and Adaptive Learning in Complex Systems**
 
